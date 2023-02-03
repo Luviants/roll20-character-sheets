@@ -1,0 +1,488 @@
+<div class="main">
+
+  <!--Abre cabeçalho-->
+  <div class="container-logo"> <!--logo cabeçalho-->
+    <img src="https://i.imgur.com/YNrviga.png" class="logo-exilia"/>
+  </div> <!--logo cabeçalho-->
+
+  <div class="header-info"> <!--cabeçalho da ficha (informações do personagem)-->
+    <div class="input-with-text-bellow char-name">
+      <input name="attr_character_name" type="text" value="" spellcheck="false" class="char-info">
+      <span>Nome</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_idade" type="number" spellcheck="false" value="" class="char-info"/>
+      <span>Idade</span>
+    </div>
+    
+    <div class="input-with-text-bellow">
+      <input name="attr_raca" type="text" spellcheck="false" value="" class="char-info"/>
+      <span>Raça</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_classe" type="text" spellcheck="false" value="" class="char-info"/>
+      <span>Classe</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_conceito" type="text" spellcheck="false" value="" class="char-info"/>
+      <span>Conceito</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_alinhamento" type="text" spellcheck="false" value="" class="char-info"/>
+      <span>Alinhamento</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_xp_raça" type="number" spellcheck="false" value="" class="char-info"/>
+      <span>Xp de Raça</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_xp_classe" type="number" spellcheck="false" value="" class="char-info"/>
+      <span>Xp de Classe</span>
+    </div>
+
+    <div class="input-with-text-bellow">
+      <input name="attr_nivel" type="number" spellcheck="false" value="" class="char-info"/>
+      <span>Nível</span>
+    </div>
+  </div> <!--cabeçalho da ficha (informações do personagem)-->
+  <!--Fecha cabeçalho-->
+
+  <div class=container-botao> <!--Botões troca pagina-->
+    <button type="action" name="act_character" class="button-personagem">
+      <h4>Personagem</h4>
+    </button>
+
+    <button type="action" name="act_journal" class="button-magia">
+      <h4>Magia</h4>
+    </button>
+
+    <button type="action" name="act_configuration" class="button-equipamento">
+      <h4>Equipamentos</h4>
+    </button>
+  </div> <!--Botões troca pagina-->
+
+  <input type='hidden' class='sheet-tabstoggle' name='attr_sheetTab' value='character'/>
+
+  <div class="sheet-character"> <!--"sheet-character"-->
+    <span>
+      <div class="linha-de-divisao">
+        <h3>Personagem</h3>
+      </div>
+
+      <div class="2colrow"> <!--"2colrow"-->
+        <div class="col"> <!--"col"-->
+          <div class="coluna-atributo"> <!--"coluna-atributo"-->
+            <img src="https://i.imgur.com/bHBOKSB.png" class="img-dragon"/>
+            <div class="atributo-name"> <!--"atributo-name"-->
+              <h2>Atributos</h2>
+            </div> <!--"atributo-name"-->
+
+            <input type="text" style="width: 14%;" name="Fake" value="NOME" class="coluna1"/>
+
+            <input
+              type="text" style="width: 14%;
+              background-color:#D3D3D3" name="Fake" value="BASE" class="linha1"
+            />
+
+            <input
+              type="text" style="width: 13%; 
+              background-color:#D3D3D3" name="Fake" value="TEMP" class="linha1"
+            />
+
+            <input
+              type="text" style="width: 11%;
+              background-color:#D3D3D3" name="Fake" value="MOD" class="linha1"
+            />
+
+            <input
+              type="text" style="width: 14%;
+              background-color:#D3D3D3" name="Fake" value="TESTE" class="linha1"
+            />
+
+            <div class="sheet-atributo-força"> <!--"sheet-atributo-força"-->
+              <input type="text" name="força" style="width:14%;" value="FOR" class="coluna1"/>
+
+              <input type="number" name="attr_For" style="width: 14%;" value="0" class="linha1"/>
+
+              <input
+                type="number" name="attr_For-Total" style="display: none;
+                width:10em;" value="(@{For} + @{For-Temp})" disabled
+              />
+
+              <input type="number" style="width: 13%;" name="attr_For-Temp" value="0" class="linha1"/>
+
+              <input type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_For-Mod"
+                value="(ceil((@{For-Total}-10)/2))" class="linha1" disabled
+              />
+
+              <input
+                type="number" width=4 style="width: 14%;
+                background-color:#FAEBD7;" name="attr_For-Teste"
+                value="((@{For}*4) + (@{For-Temp}*4))" class="linha1" disabled
+              />
+
+              <button name="roll_for" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Força}}
+                {{Valor_Atributo=[[@{For-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{For-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1">
+              </button>
+
+              <button name="roll_for" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Força}}
+                {{Valor_Atributo=[[(@{For-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{For-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2">
+              </button>
+                
+              <button name="roll_for" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Força}}
+                {{Valor_Atributo=[[(@{For-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{For-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}"class="dado3">
+              </button>
+            </div> <!--"sheet-atributo-força"-->
+
+            <div class="sheet-atributo-constituição"> <!--"sheet-atributo-constituição"-->
+              <input type="text" name="Constituição" style='width:14%;'value="CON" class="coluna1"/>
+
+              <input type="number" style="width: 14%;" name="attr_Con" value="0" class="linha1"/>
+
+              <input
+                type="number" name="attr_Con-Total" style="display: none;
+                width:10em;" value="(@{Con} + @{Con-Temp})" disabled
+              >
+              <input type="number" style="width: 13%;" name="attr_Con-Temp" value="0" class="linha1"/>
+
+              <input
+                type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Con-Mod"
+                value="(ceil((@{Con-Total}-10)/2))" class="linha1" disabled
+              >
+
+              <input type="number" width=4 style="width:
+                14%;background-color:#FAEBD7;" name="attr_Con-Teste"
+                value="((@{Con}*4) + (@{Con-Temp}*4))" class="linha1" disabled
+              >
+
+              <button name="roll_con" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Constituição}}
+                {{Valor_Atributo=[[@{Con-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Con-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1">
+              </button>
+
+              <button name="roll_con" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Constituição}}
+                {{Valor_Atributo=[[(@{Con-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Con-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2">
+              </button>
+
+              <button name="roll_con" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Constituição}}
+                {{Valor_Atributo=[[(@{Con-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Con-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}" class="dado3">
+              </button>
+            </div> <!--"sheet-atributo-constituição"-->
+
+            <div class="sheet-atributo-destreza"> <!--sheet-atributo-destreza"-->
+              <input type="text" name="Destreza" style='width:14%;'value="DES" class="coluna1" class="linha1"/>
+
+              <input type="number" style="width: 14%;" name="attr_Des" value="0" class="linha1"/>
+
+              <input
+                type="number" name="attr_Des-Total" style="display: none;
+                width:10em;" value="(@{Des} + @{Des-Temp})" disabled
+              />
+
+              <input type="number" style="width: 13%;" name="attr_Des-Temp" value="0" class="linha1"/>
+
+              <input
+                type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Des-Mod"
+                value="(ceil((@{Des-Total}-10)/2))" class="linha1" disabled
+              />
+
+              <input
+                type="number" width=4 style="width:
+                14%;background-color:#FAEBD7;" name="attr_Des-Teste"
+                value="((@{Des}*4) + (@{Des-Temp}*4))" class="linha1" disabled
+              />
+
+              <button name="roll_des" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Destreza}}
+                {{Valor_Atributo=[[@{Des-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Des-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1">
+              </button>
+
+              <button name="roll_des" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Destreza}}
+                {{Valor_Atributo=[[(@{Des-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Des-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2">
+              </button>
+
+              <button name="roll_des" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Destreza}}
+                {{Valor_Atributo=[[(@{Des-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Des-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}" class="dado3">
+              </button>
+            </div> <!--sheet-atributo-destreza"-->
+
+            <div class="sheet-atributo-agilidade"> <!--sheet-atributo-agilidade"-->
+              <input
+                type="text" name="Agilidade" style='width:14%;'value="AGI"
+                class="coluna1" class="linha1"
+              />
+
+              <input type="number" style="width: 14%;" name="attr_Agi" value="0" class="linha1"/>
+
+              <input
+                type="number" name="attr_Agi-Total" style="display: none;
+                width:10em;" value="(@{Agi} + @{Agi-Temp})" disabled
+              />
+
+              <input
+                type="number" style="width: 13%;" name="attr_Agi-Temp"
+                value="0" class="linha1"
+              />
+
+              <input
+                type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Agi-Mod"
+                value="(ceil((@{Agi-Total}-10)/2))" class="linha1" disabled
+              />
+
+              <input
+                type="number" width=4 style="width:
+                14%;background-color:#FAEBD7;" name="attr_Agi-Teste"
+                value="((@{Agi}*4) + (@{Agi-Temp}*4))" class="linha1" disabled
+              />
+
+              <button name="roll_agi" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Agilidade}}
+                {{Valor_Atributo=[[@{Agi-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Agi-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1">
+              </button>
+
+              <button name="roll_agi" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Agilidade}}
+                {{Valor_Atributo=[[(@{Agi-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Agi-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2">
+              </button>
+
+              <button name="roll_agi" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Agilidade}}
+                {{Valor_Atributo=[[(@{Agi-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Agi-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}"class="dado3">
+              </button>
+            </div> <!--sheet-atributo-agilidade"-->
+              
+            <div class="sheet-atributo-percepcao"> <!--sheet-atributo-percepcao"-->
+              <input
+                type="text" name="Percepção" style="width:14%;"
+                value="PER" class="coluna1" class="linha1"
+              />
+
+              <input type="number" style="width: 14%;" name="attr_Per" value="0" class="linha1"/>
+
+              <input
+                type="number" name="attr_Per-Total" style="display: none;
+                width:10em;" value="(@{Per} + @{Per-Temp})" disabled
+              />
+
+              <input
+                type="number" style="width: 13%;" name="attr_Per-Temp"
+                value="0" class="linha1"
+              />
+
+              <input
+                type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Per-Mod"
+                value="(ceil((@{Per-Total}-10)/2))" class="linha1" disabled
+              />
+
+              <input
+                type="number" width=4 style="width:
+                14%;background-color:#FAEBD7;" name="attr_Per-Teste"
+                value="((@{Per}*4) + (@{Per-Temp}*4))" class="linha1" disabled
+              />
+
+              <button name="roll_per" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Percepção}}
+                {{Valor_Atributo=[[@{Per-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Per-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1">
+              </button>
+
+              <button name="roll_per" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Percepção}}
+                {{Valor_Atributo=[[(@{Per-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Per-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2">
+              </button>
+
+              <button name="roll_per" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Percepção}}
+                {{Valor_Atributo=[[(@{Per-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Per-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}" class="dado3">
+              </button>
+            </div> <!--sheet-atributo-percepcao"-->
+
+            <div class="sheet-atributo-inteligencia"> <!--"sheet-atributo-inteligencia"-->
+              <input type="text" name="Intêligencia"
+                style='width:14%;'value="INT" class="coluna1" class="linha1"/>
+              <input type="number" style="width: 14%;" name="attr_Int" value="0"
+                class="linha1"/>
+              <input type="number" name="attr_Int-total" style="display: none;
+                width:10em;" value="(@{Int} + @{Int-Temp})" disabled>
+              <input type="number" style="width: 13%;" name="attr_Int-Temp"
+                value="0" class="linha1"/>
+              <input type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Int-Mod"
+                value="(ceil((@{Int-Total}-10)/2))" class="linha1" disabled>
+              <input type="number" width=4 style="width:
+                14%;background-color:#FAEBD7;" name="attr_Int-Teste"
+                value="((@{Int}*4) + (@{Int-Temp}*4))" class="linha1" disabled>
+              <button name="roll_int" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Inteligencia}}
+                {{Valor_Atributo=[[@{Int-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Int-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1"></button>
+              <button name="roll_int" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Inteligencia}}
+                {{Valor_Atributo=[[(@{Int-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Int-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2"></button>
+              <button name="roll_int" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Inteligencia}}
+                {{Valor_Atributo=[[(@{Int-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Int-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}" class="dado3"></button>
+            </div> <!--"sheet-atributo-inteligencia"-->
+
+            <div class="sheet-atributo-vontade"> <!--"sheet-atributo-vontade"-->
+              <input type="text" name="Vontade" style='width:14%;'value="VON"
+                class="coluna1" class="linha1"/>
+              <input type="number" style="width: 14%;" name="attr_Von" value="0"
+                class="linha1"/>
+              <input type="number" name="attr_Von-total" style="display: none;
+                width:10em;" value="(@{Von} + @{Von-Temp})" disabled>
+              <input type="number" style="width: 13%;" name="attr_Von-Temp"
+                value="0" class="linha1"/>
+              <input type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Von-Mod"
+                value="(ceil((@{Von-Total}-10)/2))" class="linha1" disabled>
+              <input type="number" width=4 style="width: 14%;
+                background-color:#FAEBD7;" name="attr_Von-Teste"
+                value="((@{Von}*4) + (@{Von-Temp}*4))" class="linha1" disabled>
+              <button name="roll_von" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Força de Vontade}}
+                {{Valor_Atributo=[[@{Von-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Von-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1"></button>
+              <button name="roll_von" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Força de Vontade}}
+                {{Valor_Atributo=[[(@{Von-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Von-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2"></button>
+              <button name="roll_von" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Força de Vontade}}
+                {{Valor_Atributo=[[(@{Von-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Von-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}" class="dado3"></button>
+            </div> <!--"sheet-atributo-vontade"-->
+
+            <div class="sheet-atributo-carisma"> <!--"sheet-atributo-carisma"-->
+              <input type="text" name="Carisma" style='width:14%;'value="CAR"
+                class="coluna1"/>
+              <input type="number" style="width: 14%;" name="attr_Car" value="0"
+                class="linha1"/>
+              <input type="number" name="attr_Car-total" style="display: none;
+                width:10em;" value="(@{Car} + @{Car-Temp})" disabled>
+              <input type="number" style="width: 13%;" name="attr_Car-Temp"
+                value="0" class="linha1"/>
+              <input type="number" width=3 style="width: 11%;
+                background-color:#ABABAB" name="attr_Car-Mod"
+                value="(ceil((@{Car-Total}-10)/2))" class="linha1" disabled>
+              <input type="number" width=4 style="width:
+                14%;background-color:#FAEBD7;" name="attr_Car-Teste"
+                value="((@{Car}*4) + (@{Car-Temp}*4))" class="linha1" disabled>
+              <button name="roll_car" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Carisma}}
+                {{Valor_Atributo=[[@{Car-Teste}]]}}
+                {{Sucesso_Crítico=[[floor((@{Car-Teste}/4) + (@{critico}))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado1"></button>
+              <button name="roll_car" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Carisma}}
+                {{Valor_Atributo=[[(@{Car-Teste}/2)]]}}
+                {{Sucesso_Crítico=[[floor((@{Car-Teste}/8) + (@{critico}/2))]]}}
+                {{Sucesso_Decisivo=[[@{decisivo}+5]]}} {{Rolagem=[[1d100cs<0cf>96]]}}"
+                class="dado2"></button>
+              <button name="roll_car" type="roll" value="&{template:default}
+                {{name=@{character_name} Teste de Carisma}}
+                {{Valor_Atributo=[[(@{Car-Teste}/4)]]}}
+                {{Sucesso_Crítico=[[floor((@{Car-Teste}/16) +
+                (@{critico}/4))]]}} {{Sucesso_Decisivo=[[@{decisivo}+5]]}}
+                {{Rolagem=[[1d100cs<0cf>96]]}}" class="dado3"></button>
+            </div> <!--"sheet-atributo-carisma"-->
+
+            <div class="sheet-total"> <!--"sheet-total"-->
+              <input type="text" name="total" style="width:14%;" value="TOTAL"
+                class="coluna1"/>
+              <input name="attr_atributototal" style="width: 14%;" type="number"
+                value="(@{For} + @{Con} + @{Des} + @{Agi} + @{Per} + @{Int} +
+                @{Von}+ @{Car})" class="linha1" disabled>
+              <input type="text" name="Iniciativafake" style="width:23%;"
+                value="INICIATIVA" class="coluna1"/>
+              <input type="text" name="+" style="width:5%;" value="+"
+                class="inic-add"/>
+              <input type="text" name="attr_inic-add" style="width:26%;"
+                value="0" class="coluna1"/>
+              <button name="roll_ini" type="roll" value="&{template:default}
+                {{name=@{character_name} Iniciativa}}
+                {{[[1d10+@{Agi}+@{Agi-Temp}+@{inic-add}&{tracker:+}]]}}"
+                class="dado7"></button>
+            </div> <!--"sheet-total"-->
+          </div> <!--"coluna-atributo"-->
+        </div> <!--"col"-->
+      </div> <!--"2colrow"-->
+    </span>
+  </div> <!--"sheet-character"-->
